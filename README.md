@@ -1,5 +1,5 @@
 # Animalfriendclub
-
+My presets for nuxt i :: 
 - Javascript
 - npm
 - Vuetify
