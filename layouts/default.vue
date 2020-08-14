@@ -9,12 +9,15 @@
 
 <script>
 // import Sidebar from "~/components/sidebar";
-import Navbar from "~/components/navbar"
+import Navbar from "~/components/navbar";
 export default {
   components: {
     // Sidebar,
     Navbar,
   },
-}
+};
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+@import "assets/variables.scss";
+@import "assets/main.scss";
+</style>

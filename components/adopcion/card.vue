@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto" max-width="344">
-    <v-img :src="post.img" height="200px"></v-img>
+    <v-img :src="post.img" @click="openpost(post)" height="200px" class="cursor-pointer"></v-img>
 
     <div class="card-title">
       {{ post.title }}
@@ -11,9 +11,9 @@
 
       <!-- <v-btn color="purple" text>Explore</v-btn> -->
 
-      <v-btn icon link @click="openpost(post)">
+      <!-- <v-btn icon link @click="openpost(post)">
         <v-icon>mdi-eye-outline</v-icon>
-      </v-btn>
+      </v-btn> -->
       <!-- <v-btn icon :color="like ? 'pink' : 'grey'">
         <v-icon>mdi-heart</v-icon>
       </v-btn> -->
@@ -41,7 +41,7 @@ export default {
   data: () => ({
     show: false,
   }),
-}
+};
 </script>
 <style lang="scss">
 .h-50px {

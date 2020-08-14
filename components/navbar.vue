@@ -6,31 +6,46 @@
       <v-toolbar-title class="">Animalfriend.club</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <!-- <v-btn> -->
-        <!-- <v-btn nuxt to="/registro" color="primary">Registrate</v-btn>
-        <v-btn nuxt to="/login" color="light">Login</v-btn> -->
-        <!-- <v-icon>home</v-icon> -->
-        
-      <!-- </v-btn> -->
-
-      <!-- <v-btn icon>
-        <v-icon>mdi-account-circle</v-icon>
-      </v-btn> -->
-
-      <v-menu left bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon color="white">mdi-account-circle</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <!-- If haver USER -->
+      <template v-if="currentUser">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn v-bind="attrs" v-on="on" text>
+              <strong class="text-caption mr-2 white--text"
+                >Luis F. Kennedy</strong
+              >
+              <v-avatar size="35">
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                />
+              </v-avatar>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item v-for="(item, index) in 5" :key="index">
+              <v-list-item-title>Item 1</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
+      <!-- No USER -->
+      <template v-if="!currentUser">
+        <!-- <v-btn class="mx-2" >Registrarse</v-btn> -->
+        <v-btn class="mx-2 text-caption-2 text-capitalize">Registrar</v-btn>
+        <v-btn class="mx-2 text-caption-2 text-capitalize white--text" text
+          >Iniciar Sesion</v-btn
+        >
+      </template>
     </v-app-bar>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      currentUser: null,
+    };
+  },
+};
+</script>

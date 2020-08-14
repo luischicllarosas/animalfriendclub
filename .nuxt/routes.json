@@ -1,0 +1,26 @@
+[
+  {
+    "name": "adopta",
+    "path": "/adopta",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\adopta\\\\index.vue",
+    "chunkName": "pages/adopta/index"
+  },
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\inspire.vue",
+    "chunkName": "pages/inspire"
+  },
+  {
+    "name": "adopta-id",
+    "path": "/adopta/:id",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\adopta\\\\_id.vue",
+    "chunkName": "pages/adopta/_id"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]
