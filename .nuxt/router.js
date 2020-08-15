@@ -5,6 +5,8 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _6d7d1d39 = () => interopDefault(import('..\\pages\\adopta\\index.vue' /* webpackChunkName: "pages/adopta/index" */))
 const _e1496bdc = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _3f8b84f9 = () => interopDefault(import('..\\pages\\auth\\login.vue' /* webpackChunkName: "pages/auth/login" */))
+const _e94f757a = () => interopDefault(import('..\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
 const _2419cc3e = () => interopDefault(import('..\\pages\\adopta\\_id.vue' /* webpackChunkName: "pages/adopta/_id" */))
 const _290a2c0a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -32,6 +34,14 @@ export const routerOptions = {
     path: "/inspire",
     component: _e1496bdc,
     name: "inspire"
+  }, {
+    path: "/auth/login",
+    component: _3f8b84f9,
+    name: "auth-login"
+  }, {
+    path: "/auth/register",
+    component: _e94f757a,
+    name: "auth-register"
   }, {
     path: "/adopta/:id",
     component: _2419cc3e,

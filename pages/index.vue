@@ -2,45 +2,31 @@
   <v-lazy>
     <v-row>
       <v-col v-for="item in post" :key="item.id" sm="6" lg="4" xl="3">
-        <Card :post="item" :openpost="openpost" />
-
-        <v-overlay :value="overlay">
-          <v-btn icon @click="overlay = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-          <v-card max-width="640">
-            <v-img
-              class="mx-auto"
-              :src="overlayItems.img"
-              width="640"
-              max-width="780"
-              max-height="480"
-            ></v-img>
-            <v-card-title>{{ overlayItems.title }}</v-card-title>
-            <v-card-text>
-              Hola
-            </v-card-text>
-          </v-card>
-        </v-overlay>
+        <Card :cardItem="item" :overlay="overlay" :overlayAction="overlayAction" />
       </v-col>
+
+      <Overlay :overlay="overlay" :overlayAction="overlayAction" :overlayItem="overlayItem" />
     </v-row>
   </v-lazy>
 </template>
 <script>
 import Card from "@/components/adopcion/card";
+import Overlay from "@/components/overlay";
 export default {
   components: {
     Card,
+    Overlay,
   },
   data() {
     return {
       overlay: false,
-      overlayItems: [],
+      overlayItem: [],
+
       post: [
         {
           id: 1,
           title: "TItle 1",
-          img: "/photos/4_4.jpg",
+          img: [{ url: "/photos/4_4.jpg" }, { url: "/photos/16_9.jpg" }, { url: "/photos/400_400.jpg" }],
           content:
             "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
           like: true,
@@ -48,33 +34,33 @@ export default {
         {
           id: 2,
           title: "Lorem ipsum dolor",
-          img: "/photos/16_9.jpg",
+          img: [{ url: "/photos/16_9.jpg" }],
           content:
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro veritatis nostrum quaerat distinctio unde quae, est harum quia, laborum labore illum vitae quibusdam eaque deserunt totam ipsam non placeat possimus.",
         },
         {
           id: 3,
           title: "Titulo 3",
-          img: "/photos/21_9.jpg",
+          img: [{ url: "/photos/21_9.jpg" }],
           content:
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro veritatis nostrum quaerat distinctio unde quae, est harum quia, laborum labore illum vitae quibusdam eaque deserunt totam ipsam non placeat possimus.",
         },
         {
           id: 4,
           title: "Titulo 4",
-          img: "/photos/400_400.jpg",
+          img: [{ url: "/photos/400_400.jpg" }],
           content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
         },
         {
           id: 5,
           title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit Po.",
-          img: "/photos/4_4.jpg",
+          img: [{ url: "/photos/4_4.jpg" }],
           content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
         },
         {
           id: 6,
           title: "Titulo 6",
-          img: "/photos/4_4.jpg",
+          img: [{ url: "/photos/4_4.jpg" }],
           content: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro
         veritatis nostrum quaerat distinctio unde quae, est harum quia, laborum
         labore illum vitae quibusdam eaque deserunt totam ipsam non placeat
@@ -84,10 +70,15 @@ export default {
     };
   },
   methods: {
-    openpost(item) {
-      console.log(item);
-      this.overlayItems = item;
-      this.overlay = true;
+    overlayAction(item) {
+      this.overlay = !this.overlay;
+      if (this.overlay) {
+        console.log(item);
+        this.overlayItem = item;
+      }
+      // console.log(item);
+      // this.overlayItems = item;
+      // this.overlay = true;
     },
   },
   async created() {

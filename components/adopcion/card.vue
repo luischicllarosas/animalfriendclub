@@ -1,22 +1,15 @@
 <template>
   <v-card class="mx-auto" max-width="344">
-    <v-img :src="post.img" @click="openpost(post)" height="200px" class="cursor-pointer"></v-img>
+    <v-img :src="cardItem.img[0].url" @click="overlayAction(cardItem)" height="200px" class="cursor-pointer"></v-img>
 
     <div class="card-title">
-      {{ post.title }}
+      {{ cardItem.title }}
     </div>
     <!-- <v-card-subtitle>1,000 miles of wonder</v-card-subtitle> -->
     <v-card-actions>
       <!-- <v-btn text color="purple">Ver mas</v-btn> -->
 
       <!-- <v-btn color="purple" text>Explore</v-btn> -->
-
-      <!-- <v-btn icon link @click="openpost(post)">
-        <v-icon>mdi-eye-outline</v-icon>
-      </v-btn> -->
-      <!-- <v-btn icon :color="like ? 'pink' : 'grey'">
-        <v-icon>mdi-heart</v-icon>
-      </v-btn> -->
 
       <v-spacer></v-spacer>
       <v-btn icon @click="show = !show">
@@ -28,7 +21,7 @@
       <div v-show="show">
         <v-divider></v-divider>
         <v-card-text>
-          {{ post.content }}
+          {{ cardItem.content }}
         </v-card-text>
       </div>
     </v-expand-transition>
@@ -37,7 +30,7 @@
 
 <script>
 export default {
-  props: ["post", "openpost"],
+  props: ["cardItem", "overlay", "overlayAction"],
   data: () => ({
     show: false,
   }),

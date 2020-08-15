@@ -11,6 +11,12 @@
   "LazyNavbar": {
     "description": "Auto imported from components/navbar.vue"
   },
+  "Overlay": {
+    "description": "Auto imported from components/overlay.vue"
+  },
+  "LazyOverlay": {
+    "description": "Auto imported from components/overlay.vue"
+  },
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   },

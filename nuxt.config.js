@@ -56,12 +56,34 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/auth',
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+    baseURL : "http://localhost/api/animalfriends/",
+  },
+  auth:{
+    strategies:{
+      local:{
+        endpoints:{
+          login:{
+            url : 'auth/login', method:'post', propertyName: 'token',
+          },
+          users:{
+            url:'users',method:'get',propertyName:'data'
+          },
+          logout: 'logout',method:'get'
+        }
+      },
+      redirect:{
+        login:'auth/login',
+        home: '/',
+      }
+    }
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
@@ -88,5 +110,6 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    // extractCSS:true,
   }
 }

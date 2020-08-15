@@ -8,6 +8,7 @@ import NuxtError from '..\\layouts\\error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
+import { createStore } from './store.js'
 
 /* Plugins */
 
@@ -16,6 +17,7 @@ import nuxt_plugin_workbox_338b70d8 from 'nuxt_plugin_workbox_338b70d8' // Sourc
 import nuxt_plugin_nuxticons_a342b860 from 'nuxt_plugin_nuxticons_a342b860' // Source: .\\nuxt-icons.js (mode: 'all')
 import nuxt_plugin_plugin_c135a182 from 'nuxt_plugin_plugin_c135a182' // Source: .\\vuetify\\plugin.js (mode: 'all')
 import nuxt_plugin_axios_7f2c1078 from 'nuxt_plugin_axios_7f2c1078' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_plugin_4afbc627 from 'nuxt_plugin_plugin_4afbc627' // Source: .\\auth\\plugin.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -49,6 +51,14 @@ const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearC
 async function createApp(ssrContext, config = {}) {
   const router = await createRouter(ssrContext)
 
+  const store = createStore(ssrContext)
+  // Add this.$router into store actions/mutations
+  store.$router = router
+
+  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
+  const registerModule = store.registerModule
+  store.registerModule = (path, rawModule, options) => registerModule.call(store, path, rawModule, Object.assign({ preserveState: process.client }, options))
+
   // Create Root instance
 
   // here we inject the router and store to all child components,
@@ -56,6 +66,7 @@ async function createApp(ssrContext, config = {}) {
   const app = {
     head: {"titleTemplate":"%s - animalfriendclub","title":"animalfriendclub","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"My presets for nuxt i :: \r - Javascript\r - npm\r - Vuetify\r - Axios && PWA\r - Prettier\r - SSR\u002FSSG\r - Static\r - jsconfig.json"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"animalfriendclub"},{"hid":"theme-color","name":"theme-color","content":"black"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"animalfriendclub"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"animalfriendclub"},{"hid":"og:description","name":"og:description","property":"og:description","content":"My presets for nuxt i :: \r - Javascript\r - npm\r - Vuetify\r - Axios && PWA\r - Prettier\r - SSR\u002FSSG\r - Static\r - jsconfig.json"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.db03dff7.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64.5f6a36.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512.5f6a36.png","sizes":"512x512"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
 
+    store,
     router,
     nuxt: {
       defaultTransition,
@@ -100,6 +111,9 @@ async function createApp(ssrContext, config = {}) {
     ...App
   }
 
+  // Make app available into store via this.app
+  store.app = app
+
   const next = ssrContext ? ssrContext.next : location => app.router.push(location)
   // Resolve route
   let route
@@ -112,6 +126,7 @@ async function createApp(ssrContext, config = {}) {
 
   // Set context to app.context
   await setContext(app, {
+    store,
     route,
     next,
     error: app.nuxt.error.bind(app),
@@ -138,6 +153,9 @@ async function createApp(ssrContext, config = {}) {
       app.context[key] = value
     }
 
+    // Add into store
+    store[key] = app[key]
+
     // Check if plugin not already installed
     const installKey = '__nuxt_' + key + '_installed__'
     if (Vue[installKey]) {
@@ -158,6 +176,13 @@ async function createApp(ssrContext, config = {}) {
 
   // Inject runtime config as $config
   inject('config', config)
+
+  if (process.client) {
+    // Replace store state before plugins execution
+    if (window.__NUXT__ && window.__NUXT__.state) {
+      store.replaceState(window.__NUXT__.state)
+    }
+  }
 
   // Add enablePreview(previewData = {}) in context for plugins
   if (process.static && process.client) {
@@ -188,6 +213,10 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_axios_7f2c1078(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_plugin_4afbc627 === 'function') {
+    await nuxt_plugin_plugin_4afbc627(app.context, inject)
+  }
+
   // Lock enablePreview in context
   if (process.static && process.client) {
     app.context.enablePreview = function () {
@@ -213,6 +242,7 @@ async function createApp(ssrContext, config = {}) {
   }
 
   return {
+    store,
     app,
     router
   }
