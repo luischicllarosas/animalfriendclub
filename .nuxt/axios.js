@@ -139,8 +139,8 @@ export default (ctx, inject) => {
   const runtimeConfig = ctx.$config && ctx.$config.axios || {}
   // baseURL
   const baseURL = process.browser
-    ? (runtimeConfig.browserBaseURL || runtimeConfig.baseURL || 'http://localhost/api/animalfriends/')
-      : (runtimeConfig.baseURL || process.env._AXIOS_BASE_URL_ || 'http://localhost/api/animalfriends/')
+    ? (runtimeConfig.browserBaseURL || runtimeConfig.baseURL || 'http://localhost:3333/')
+      : (runtimeConfig.baseURL || process.env._AXIOS_BASE_URL_ || 'http://localhost:3333/')
 
   // Create fresh objects for all default header scopes
   // Axios creates only one which is shared across SSR requests!

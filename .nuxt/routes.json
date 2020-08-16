@@ -2,43 +2,50 @@
   {
     "name": "adopta",
     "path": "/adopta",
-    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\adopta\\\\index.vue",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\af\\\\animalfriendclub\\\\pages\\\\adopta\\\\index.vue",
     "chunkName": "pages/adopta/index",
-    "_name": "_6d7d1d39"
+    "_name": "_177c490a"
+  },
+  {
+    "name": "dashboard",
+    "path": "/dashboard",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\af\\\\animalfriendclub\\\\pages\\\\dashboard.vue",
+    "chunkName": "pages/dashboard",
+    "_name": "_1318c7e4"
   },
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\inspire.vue",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\af\\\\animalfriendclub\\\\pages\\\\inspire.vue",
     "chunkName": "pages/inspire",
-    "_name": "_e1496bdc"
+    "_name": "_81d73c58"
   },
   {
     "name": "auth-login",
     "path": "/auth/login",
-    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\auth\\\\login.vue",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\af\\\\animalfriendclub\\\\pages\\\\auth\\\\login.vue",
     "chunkName": "pages/auth/login",
-    "_name": "_3f8b84f9"
+    "_name": "_398eebbb"
   },
   {
     "name": "auth-register",
     "path": "/auth/register",
-    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\auth\\\\register.vue",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\af\\\\animalfriendclub\\\\pages\\\\auth\\\\register.vue",
     "chunkName": "pages/auth/register",
-    "_name": "_e94f757a"
+    "_name": "_45a9617e"
   },
   {
     "name": "adopta-id",
     "path": "/adopta/:id",
-    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\adopta\\\\_id.vue",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\af\\\\animalfriendclub\\\\pages\\\\adopta\\\\_id.vue",
     "chunkName": "pages/adopta/_id",
-    "_name": "_2419cc3e"
+    "_name": "_3012feba"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\Nuxt\\\\animalfriendclub\\\\pages\\\\index.vue",
+    "component": "C:\\\\Users\\\\fer_2\\\\Desktop\\\\af\\\\animalfriendclub\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_290a2c0a"
+    "_name": "_284a4c4c"
   }
 ]

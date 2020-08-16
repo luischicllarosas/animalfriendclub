@@ -3,12 +3,13 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _6d7d1d39 = () => interopDefault(import('..\\pages\\adopta\\index.vue' /* webpackChunkName: "pages/adopta/index" */))
-const _e1496bdc = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _3f8b84f9 = () => interopDefault(import('..\\pages\\auth\\login.vue' /* webpackChunkName: "pages/auth/login" */))
-const _e94f757a = () => interopDefault(import('..\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
-const _2419cc3e = () => interopDefault(import('..\\pages\\adopta\\_id.vue' /* webpackChunkName: "pages/adopta/_id" */))
-const _290a2c0a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _177c490a = () => interopDefault(import('..\\pages\\adopta\\index.vue' /* webpackChunkName: "pages/adopta/index" */))
+const _1318c7e4 = () => interopDefault(import('..\\pages\\dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
+const _81d73c58 = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _398eebbb = () => interopDefault(import('..\\pages\\auth\\login.vue' /* webpackChunkName: "pages/auth/login" */))
+const _45a9617e = () => interopDefault(import('..\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
+const _3012feba = () => interopDefault(import('..\\pages\\adopta\\_id.vue' /* webpackChunkName: "pages/adopta/_id" */))
+const _284a4c4c = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -28,27 +29,31 @@ export const routerOptions = {
 
   routes: [{
     path: "/adopta",
-    component: _6d7d1d39,
+    component: _177c490a,
     name: "adopta"
   }, {
+    path: "/dashboard",
+    component: _1318c7e4,
+    name: "dashboard"
+  }, {
     path: "/inspire",
-    component: _e1496bdc,
+    component: _81d73c58,
     name: "inspire"
   }, {
     path: "/auth/login",
-    component: _3f8b84f9,
+    component: _398eebbb,
     name: "auth-login"
   }, {
     path: "/auth/register",
-    component: _e94f757a,
+    component: _45a9617e,
     name: "auth-register"
   }, {
     path: "/adopta/:id",
-    component: _2419cc3e,
+    component: _3012feba,
     name: "adopta-id"
   }, {
     path: "/",
-    component: _290a2c0a,
+    component: _284a4c4c,
     name: "index"
   }],
 

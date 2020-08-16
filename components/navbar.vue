@@ -29,7 +29,7 @@
         <!-- <v-btn class="mx-2" >Registrarse</v-btn> -->
         <v-btn nuxt to="/auth/register" class="mx-2 text-caption-2 text-capitalize">Registrar</v-btn>
         <v-btn nuxt to="/auth/login" class="mx-2 text-caption-2 text-capitalize white--text" text>Iniciar Sesion</v-btn>
-        
+        <v-btn @click="logout" class="mx-2 text-caption-2 text-capitalize white--text" text>Logout</v-btn>
       </template>
     </v-app-bar>
   </div>
@@ -41,5 +41,10 @@ export default {
       currentUser: null,
     };
   },
+  methods:{
+    async logout(){
+      let res = await this.$auth.logout(); 
+    }
+  }
 };
 </script>

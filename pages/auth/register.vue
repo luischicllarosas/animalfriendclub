@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     async register() {
-      await this.$axios.post('/auth/register',this.form);
+      // await this.$axios.post('/auth/register',this.form);
     },
   },
 };

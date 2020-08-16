@@ -6,7 +6,7 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title>Login login</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
@@ -18,15 +18,28 @@
                 </v-tooltip>
               </v-toolbar>
               <v-card-text>
-                <v-form>
-                  <v-text-field label="Login" name="login" prepend-icon="mdi-account" type="text"></v-text-field>
-
-                  <v-text-field id="password" label="Password" name="password" prepend-icon="mdi-lock" type="password"></v-text-field>
+                <v-form @submit.prevent="userLogin">
+                  <v-text-field
+                    v-model="login.email"
+                    label="Login"
+                    name="login"
+                    prepend-icon="mdi-account"
+                    type="text"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="login.password"
+                    id="password"
+                    label="Password"
+                    name="password"
+                    prepend-icon="mdi-lock"
+                    type="password"
+                  ></v-text-field>
+                  <v-btn type="submit" color="primary">Ingresar</v-btn>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">Ingresar</v-btn>
+                <!-- <v-btn color="primary">Ingresar</v-btn> -->
               </v-card-actions>
             </v-card>
           </v-col>
@@ -40,6 +53,27 @@
 export default {
   props: {
     source: String,
+  },
+  data() {
+    return {
+      login: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async userLogin() {
+      try {
+        let response = await this.$auth.loginWith("local", {
+          data: this.login,
+        });
+        
+          // this.$router.push('/dashboard')
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>
