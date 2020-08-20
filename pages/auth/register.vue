@@ -19,16 +19,17 @@
               </v-toolbar>
               <v-card-text>
                 <v-form @submit.prevent="register">
-                  <v-text-field v-model="form.name" label="Nombres" name="login" prepend-icon="mdi-card-account-details" type="text"> </v-text-field>
+                  <v-text-field v-model="form.name" label="Nombres" name="name" prepend-icon="mdi-card-account-details" type="text"> </v-text-field>
                   <v-text-field v-model="form.email" label="Email" name="email" prepend-icon="mdi-at" type="text"> </v-text-field>
                   <v-text-field v-model="form.password" id="password" label="Contraseña" name="password" prepend-icon="mdi-lock" type="password"> </v-text-field>
+                  <v-text-field v-model="form.password_confirmation" id="password" label="Confirma tu contraseña" name="password_confirmation" prepend-icon="mdi-lock" type="password"> </v-text-field>
                   <v-btn type="submit" color="primary">Registrarse</v-btn>
                 </v-form>
               </v-card-text>
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="primary">Registrarse</v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>
@@ -48,12 +49,19 @@ export default {
         name: "",
         email: "",
         password: "",
+        password_confirmation: "",
       },
     };
   },
   methods: {
     async register() {
-      // await this.$axios.post('/auth/register',this.form);
+      try {
+        let res = await this.$axios.post('/api/auth/register',this.form);
+        console.log(res);
+        
+      } catch (error) {
+        
+      }
     },
   },
 };

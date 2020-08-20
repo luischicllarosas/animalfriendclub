@@ -19,21 +19,8 @@
               </v-toolbar>
               <v-card-text>
                 <v-form @submit.prevent="userLogin">
-                  <v-text-field
-                    v-model="login.email"
-                    label="Login"
-                    name="login"
-                    prepend-icon="mdi-account"
-                    type="text"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="login.password"
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="mdi-lock"
-                    type="password"
-                  ></v-text-field>
+                  <v-text-field v-model="login.email" label="Login" name="login" prepend-icon="mdi-account" type="text"></v-text-field>
+                  <v-text-field v-model="login.password" id="password" label="Password" name="password" prepend-icon="mdi-lock" type="password"></v-text-field>
                   <v-btn type="submit" color="primary">Ingresar</v-btn>
                 </v-form>
               </v-card-text>
@@ -68,8 +55,12 @@ export default {
         let response = await this.$auth.loginWith("local", {
           data: this.login,
         });
-        
-          // this.$router.push('/dashboard')
+        // this.$auth.setUser({
+        //   email : this.login.email
+        // })
+        // let user = await this.$axios('api/auth/user',this.email);
+        // console.log(user);
+        this.$router.push('/dashboard');
       } catch (err) {
         console.log(err);
       }

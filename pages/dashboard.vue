@@ -1,16 +1,12 @@
 <template>
-  <div></div>
+  <v-app>
+    Hola a todos
+  </v-app>
 </template>
 <script>
 export default {
-  created() {
-    this.$axios("/dashboard")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  data() {
+    return {};
   },
 };
 </script>

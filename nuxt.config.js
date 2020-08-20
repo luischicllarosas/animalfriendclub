@@ -74,7 +74,7 @@ export default {
             logout: { url: '/api/auth/logout', method: 'post' },
             user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
           },
-          autoFetchUser: false,
+          // autoFetchUser: false,
         }
       },
       redirect:{
