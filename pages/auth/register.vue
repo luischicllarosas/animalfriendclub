@@ -155,6 +155,7 @@ export default {
       this.snackbar.status = false;
       try {
         let res = await this.$axios.post("/api/auth/register", this.form);
+
         if (res.data.body == "created") {
           this.snackbar = {
             status: true,
@@ -162,6 +163,9 @@ export default {
             content: "Te has registrado correctamente",
             timeout: 6000,
           };
+          await this.$auth.loginWith("local", {
+            data: this.form,
+          });
         }
 
         if (res.data.body == "email exists") {

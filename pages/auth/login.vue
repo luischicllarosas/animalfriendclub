@@ -8,25 +8,32 @@
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Login login</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-tooltip bottom>
+                <!-- <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-btn :href="source" icon large target="_blank" v-on="on">
                       <v-icon>mdi-code-tags</v-icon>
                     </v-btn>
                   </template>
                   <span>Source</span>
-                </v-tooltip>
+                </v-tooltip> -->
               </v-toolbar>
               <v-card-text>
-                <v-form @submit.prevent="userLogin">
-                  <v-text-field v-model="login.email" label="Login" name="login" prepend-icon="mdi-account" type="text"></v-text-field>
-                  <v-text-field v-model="login.password" id="password" label="Password" name="password" prepend-icon="mdi-lock" type="password"></v-text-field>
-                  <v-btn type="submit" color="primary">Ingresar</v-btn>
+                <v-form ref="form_login" lazy-validation>
+                  <v-text-field v-model="login.email" label="Email" name="email" prepend-icon="mdi-account" type="text" required :rules="[rules.required, rules.email]"></v-text-field>
+                  <v-text-field
+                    v-model="login.password"
+                    id="password"
+                    label="Contraseña"
+                    name="password"
+                    prepend-icon="mdi-lock"
+                    type="password"
+                    required
+                    :rules="[rules.required, rules.password]"
+                  ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <!-- <v-btn color="primary">Ingresar</v-btn> -->
+                <v-btn @click="validate" color="primary" :loading="btnLoading">Ingresar</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -47,22 +54,38 @@ export default {
         email: "",
         password: "",
       },
+      btnLoading: false,
+      rules: {
+        required: (value) => !!value || "Necesitas llenar este campo.",
+        email: (value) => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "Incorrecto, el email no tiene el formato correcto.";
+        },
+        password: (value) => value.length > 5 || "Mínimo 6 carácteres",
+      },
     };
   },
   methods: {
+    validate() {
+      this.btnLoading = true;
+      let form = this.$refs.form_login.validate();
+      if (form) {
+        this.userLogin();
+      } else {
+        this.btnLoading = false;
+      }
+    },
     async userLogin() {
       try {
-        let response = await this.$auth.loginWith("local", {
+        let res = await this.$auth.loginWith("local", {
           data: this.login,
         });
-        // this.$auth.setUser({
-        //   email : this.login.email
-        // })
-        // let user = await this.$axios('api/auth/user',this.email);
-        // console.log(user);
-        this.$router.push('/dashboard');
+        console.log("Res :: ",res);
+        this.btnLoading = false;
+        // this.$router.push("/");
       } catch (err) {
-        console.log(err);
+        console.log("Error : ",err);
+        this.btnLoading = false;
       }
     },
   },

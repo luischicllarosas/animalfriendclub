@@ -4,11 +4,7 @@
       <v-lazy>
         <v-row>
           <v-col v-for="item in post" :key="item.id" sm="6" lg="4" xl="3">
-            <Card
-              :title="item.title"
-              :content="item.content"
-              :image="item.img"
-            />
+            <Card :title="item.title" :content="item.content" :image="item.img" />
           </v-col>
         </v-row>
       </v-lazy>
@@ -17,7 +13,7 @@
 </template>
 
 <script>
-import Card from "@/components/adopcion/card"
+import Card from "@/components/adopcion/card";
 export default {
   components: {
     Card,
@@ -68,15 +64,15 @@ export default {
         possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae ipsam, aliquid, quae quam nam quidem recusandae corrupti accusantium eveniet modi veritatis officia possimus voluptas in repellendus iusto vel similique laborum!`,
         },
       ],
-    }
+    };
   },
   async created() {
-    console.log("Created")
+    console.log("Created");
     // let res = await this.$axios('https://jsonplaceholder.typicode.com/photos')
     // let newData = res.data;
     // newData.lenght = 10;
     // console.log(newData[]);
     // this.post = res.data;
   },
-}
+};
 </script>
